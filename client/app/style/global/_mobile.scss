@@ -1,0 +1,244 @@
+html.mobile {
+
+	overflow-y: auto;
+
+	$headerH: 50px;
+
+	header {
+		z-index: 9999999;
+		width: 100%;
+		height: $headerH;
+		background-color: $green;
+		position: fixed;
+		.logo {
+			$w: 70px;
+			$h: 25.2px;
+			width: $w;
+			height: $h;
+			position: absolute;
+			left: 50%;
+			margin-left: -$w/2;
+			top: 50%;
+			margin-top: -$h/2;
+		}
+	}
+
+	footer {
+		z-index: 9999999;
+		$footerH: 60px;
+		width: 100%;
+		height: $footerH;
+		background-color: $green;
+		position: fixed;
+		bottom: 0;
+		text-transform: uppercase;
+		ul {
+			li {
+				cursor: pointer;
+				$fontSize: 11px;
+				font-size: $fontSize;
+				color: #000000;
+				letter-spacing: 0.91px;
+				line-height: 21.7px;
+				border: 1px solid white;
+				border-top: 2px solid white;
+				height: $footerH;
+				position: absolute;
+				.wrapper {
+					width: 100%;
+					height: 100%;
+					text-align: center;
+					position: absolute;
+					top: 50%;
+					margin-top: -$fontSize;
+				}
+				&.com {
+					background-color: black;
+					.wrapper {
+						$w: 50px;
+						$h: 24.2px;
+						width: $w;
+						height: $h;
+						left: 50%;
+						margin-left: -$w/2;
+						position: absolute;
+					}
+				}
+			}
+		}
+	}
+	.bottom-part {
+		height: $headerH*2;
+	}
+
+	.index {
+		position: absolute;
+		top: 50px;
+		.block {
+			position: absolute;
+			border: 1px solid white;
+		}
+	}
+	.feed {
+		padding-top: $headerH;
+		width: 100%;
+
+		
+
+		.logo {
+			$lh: 110px;
+			width: 100%;
+			height: $lh;
+			svg {
+				$w: 180px;
+				$h: 80px;
+				width: $w;
+				height: $h;
+				position: relative;
+				left: 50%;
+				margin-left: -$w/2;
+				top: 24px;
+				text {
+			        fill: black;
+			        font-family: FuturaMedium;
+			        font-size: 11px;
+			        letter-spacing: 0.85px;
+			        line-height: 15.85px;
+			    }
+			}
+		}
+
+		.map {
+			p {
+				text-align: left;
+				font-size: 12px;
+				letter-spacing: 0.69px;
+				line-height: 15.85px;
+				padding: 0 30px;
+				margin: 30px 0;
+			}
+		}
+
+		.post {
+			width: 100%;
+			margin-bottom: 10px;
+			margin-top: 20px;
+			.media-wrapper {
+				.video-wrapper {
+					@extend .full;
+				}
+			}
+			.icons-wrapper {
+				height: $headerH;
+				position: relative;
+				border-bottom: 1px solid $green;
+				margin-bottom: 20px;
+				ul.left, ul.right {
+					position: absolute;
+					width: 50%;
+					left: 10px;
+					top: 12px;
+					li {
+						cursor: pointer;
+						$size: 24px;
+						width: $size;
+						height: $size;
+						@include inline-block;
+						margin-right: 10px;
+						&:last-child {
+							margin-right: 0px;
+						}
+						svg {
+							@include anim(.4s, .0s, $easeOutExpo, scale(1), 50%, 50%, transform);
+							&.highlight {
+								@include anim(.4s, .0s, $easeOutElastic, scale(1.2), 50%, 50%, transform);
+							}
+						}
+					}
+				}
+				ul.right {
+					left: 50%;
+					li {
+						position: absolute;
+						right: 10px;
+					}
+				}
+			}
+			.comments-wrapper {
+				padding: 0 10px;
+				.comment {
+					font-size: 12px;
+					letter-spacing: 0.64px;
+					line-height: 21px;
+					
+					a {
+						color: black;
+						border-bottom: 1px solid black;
+						font-size: 12px;
+						letter-spacing: 0.64px;
+						line-height: 21px;
+					}
+
+					.name {
+						text-transform: uppercase;
+						color: black;
+						float: left;
+						padding-right: 4%;
+					}
+					.text {
+						color: $green;
+						span {
+							color: black;
+						}
+					}
+				}
+			}
+			.top-wrapper {
+				text-transform: uppercase;
+				$h: 52px;
+				width: 100%;
+				height: $h;
+				position: relative;
+				& > div {
+					@extend .full;
+					position: absolute;
+				}
+				.left {
+					width: 50%;
+					img {
+						position: relative;
+    					top: 11px;
+						$s: 32px;
+						float: left;
+						width: $s;
+						height: $s;
+    					margin-right: 10px;
+    					margin-left: 10px;
+					}
+					.title {
+						float: left;
+						position: relative;
+    					top: 20px;
+						font-size: 12px;
+						letter-spacing: 0.66px;
+						line-height: 15.85px;
+					}
+				}
+				.right {
+					left: 50%;
+					width: 50%;
+					color: $green;
+					.time {
+						font-size: 10px;
+						letter-spacing: 0.49px;
+						line-height: 15.85px;
+						position: absolute;
+						top: 20px;
+						right: 10px;
+					}
+				}
+			}
+		}
+	}
+
+}

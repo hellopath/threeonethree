@@ -1,0 +1,8 @@
+@mixin globalSlideTransition() {
+    transition: transform .8s $easeInOutQuart;
+}
+
+@mixin simpleUpperText() {
+	font-size: 16px;
+    letter-spacing: 0.88px;
+}

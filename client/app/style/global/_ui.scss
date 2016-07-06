@@ -1,0 +1,292 @@
+* {
+    backface-visibility: hidden;
+    user-select: none;
+    transform-style: flat;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-user-drag: none;
+    outline: 0;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+button {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    border-spacing: 0;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    cursor: pointer;
+}
+img { 
+    border:0;
+    border-style:none;
+    outline : none;
+    border: none;
+}
+svg, svg * {
+    backface-visibility: hidden;
+}
+.clear-float {
+    clear: both;
+}
+img {
+    width: 100%;
+}
+a:-moz-focus-inner {
+    border: 0;
+    outline: none;
+}
+a:focus {
+    border: 0;
+    outline: none;
+}
+// for firefox image scale smoothing
+img {
+    -ms-interpolation-mode: bicubic;
+}
+// for ie
+img {
+    background: transparent;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF)"; /* IE8 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);   /* IE6 & 7 */
+    zoom: 1;
+}
+.btn {
+    cursor: pointer;
+}
+.relative {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.full {
+    width: 100%;
+    height: 100%;
+}
+.top-left {
+    top: 0;
+    left: 0;
+}
+.vertical-center-parent {
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+.vertical-center-child {
+    display: table-cell; 
+    vertical-align: middle; 
+    text-align: center; 
+}
+.full-block {
+    position: absolute;
+    @extend .top-left;
+}
+h4 {
+    font-size: 30px;
+    line-height: 70px;
+}
+a {
+    font-size: 22px;
+    color: $white;
+    text-decoration: none;
+}
+.arrow {
+    position: absolute;
+    polygon { fill: white; }
+    svg, .background, .icons-wrapper { position: absolute; }
+    svg {
+        $size: $iconsSize;
+        width: $size;
+        height: $size;
+        z-index: 2;
+        @include opacity(1);
+        @include anim(.3s, .0s, $easeInOutExpo, scale(1, 1) translateX(0px), 50%, 50%, transform opacity);
+    }
+    &.left svg { 
+        left: -10px;
+    }
+    &.right svg {
+        left: 10px;
+    }
+    .background {
+        position: absolute;
+        z-index: 0;
+        background-size: 100%;
+    }
+    &.hovered {
+        &.left svg { 
+            @include opacity(0);
+            @include anim(.4s, .0s, $easeOutExpo, scale(1.2, 0.5) translateX(-10px), 50%, 50%, transform opacity);
+        }
+        &.right svg {
+            @include opacity(0);
+            @include anim(.4s, .0s, $easeOutExpo, scale(1.2, 0.5) translateX(10px), 50%, 50%, transform opacity);
+        }
+    }
+}
+#transition-map {
+    @extend .full;
+    background-color: $green;
+}
+.map-wrapper {
+    position: absolute;
+    z-index: 4;
+
+    &.green-mode {
+        $time: 1.4s;
+        $ease: $easeOutCirc;
+        svg text {
+            @include simpleAnim($time, .0s, $ease);
+            fill: white;
+        }
+        .titles-wrapper {
+            @include simpleAnim($time, .0s, $ease);
+            color: white;
+        }
+        g#map-dots {
+            circle {
+                @include simpleAnim($time, .0s, $ease);
+                fill: white;
+            }
+        }
+        svg #map-bg {
+            @include simpleAnim($time, .0s, $ease);
+            fill: $green;
+            stroke: white;
+        }
+        svg #mallorca-logo path {
+            @include simpleAnim($time, .0s, $ease);
+            fill: white;
+        }
+    }
+
+    svg text {
+        fill: $green;
+        font-family: FuturaMedium;
+        font-size: 20px;
+        letter-spacing: 0.85px;
+        line-height: 15.85px;
+    }
+    .titles-wrapper {
+        color: $green;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-family: Hobo;
+        font-size: 11px;
+        letter-spacing: 0.85px;
+        line-height: 15.85px;
+        & > div {
+            white-space: nowrap;
+            position: absolute;
+            z-index: 2;
+        }
+    }
+    g#map-dots {
+        circle {
+            position: absolute;
+            fill: $green;
+            @include anim(.4s, .0s, $easeOutExpo, scale(1.2), 50%, 50%, transform);
+            &.fix-buggy-origin-position {
+                @include anim(.4s, .0s, $easeOutExpo, scale(1.2), 0%, 0%, transform);
+            }
+        }
+        .dot-path {
+            &.animate {
+                @keyframes bounce {
+                    0% {
+                        // fill: white;
+                        // stroke-width: 2;
+                        @include transform(scale(1.6));
+                        // @include anim(.2s, .0s, $easeOutExpo, scale(1.6), 50%, 50%, transform fill stroke-width);
+                    }
+                    100% {
+                        // fill: white;
+                        // stroke: $green;
+                        // stroke-width: 2;
+                        @include transform(scale(5));
+                        // @include anim(.2s, .0s, $easeOutElastic, scale(3), 50%, 50%, transform fill stroke-width);
+                    }
+                }
+                animation: bounce .15s $easeInOutExpo alternate infinite;
+            }
+        }
+    }
+    g#footsteps {
+
+        // @keyframes dash {
+        //     from {
+        //         stroke-dashoffset: 500;
+        //     }
+        //     to {
+        //         stroke-dashoffset: 100;
+        //     }
+        // }
+        
+        g {
+            @include opacity(0);
+            // @include simpleAnim(.0s, .0s, $easeOutExpo);
+
+            // path:first-child {
+            //     stroke-width: 2px;
+            //     &.animate {
+            //         @include simpleAnim(1s, .0s, linear);
+            //     }
+            // }
+            // path:last-child {
+            //     stroke-width: 2px;
+            //     &.animate {
+            //         @include simpleAnim(1s, .0s, linear);
+            //     }
+            // }
+        }
+
+    }
+}
+.text-btn {
+    text-transform: uppercase;
+    @include simpleUpperText();
+    position: absolute;
+    white-space: nowrap;
+    .text-title {
+        @include simpleAnim(.6s, 0s, $easeInOutExpo);
+    }
+    .rects-container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        & > div {
+            position: absolute;
+            width: 100%;
+        }
+        .bg-box {
+            height: 100%;
+            background-color: $green;
+        }
+        .bg-line {
+            $h: 2px;
+            height: $h;
+            top: 50%;
+            margin-top: -$h;
+            background-color: $green;
+        }
+    }
+    .inside-wrapper {
+        position: relative;
+        overflow: hidden;
+        @extend .full;
+    }
+    .background {
+        position: absolute;
+        top: -111%;
+        left: -23%;
+        width: 140%;
+        height: 300%;
+    }
+}

@@ -1,0 +1,22 @@
+#home-page {
+	@extend .full;
+	.slideshow {
+		position: absolute;
+		@extend .full;
+		& > div {
+			position: absolute;
+			@extend .full;
+		}
+		.slides-container {
+			@extend .top-left;
+		}
+		.title-container {
+			z-index: 2;
+		}
+		.slide {
+			position: absolute;
+			@extend .top-left;
+			@include simpleAnim(.6s, .0s, $easeOutExpo);
+		}
+	}	
+}

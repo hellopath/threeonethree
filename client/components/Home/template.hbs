@@ -1,0 +1,14 @@
+<div id="home-page" class="page-wrapper">
+	{{#each slideshows}}
+		<div class="slideshow">
+			<div class="title-container"></div>
+			<div class="slides-container">
+				{{#each images}}
+					<div class="slide">
+						<img src="media/slideshow/{{url}}">
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	{{/each}}
+</div>

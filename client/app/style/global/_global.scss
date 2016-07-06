@@ -1,0 +1,67 @@
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: "Futura";
+    background-color: white;
+    letter-spacing: 0.88px;
+    line-height: $globalLineHeight;
+    background-color: black;
+}
+
+html {
+    @extend .full;
+}
+
+#app-container  {
+    
+    // font smoothing
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+
+    // disable text-selection & text cursor
+    // @include user-select(none);
+    cursor: default;
+
+    // overall text params
+    font-size: $globalFontSize;
+
+    position: absolute;
+    @extend .full;
+}
+
+#app-template {
+    @extend .full;
+}
+
+#base-pager, #pages-container {
+    @extend .full;
+}
+
+#pages-container {
+    position: absolute;
+    z-index: 10;
+    & > div {
+        @extend .full;
+        position: absolute;
+    }
+}
+
+.page-wrapper {
+    position: absolute;
+}
+
+#preloader {
+    position: absolute;
+    z-index: 6;
+    @include opacity(0);
+}
+
+#front-block {
+    @extend .full;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    visibility: hidden;
+}
