@@ -1,14 +1,21 @@
 <div id="home-page" class="page-wrapper">
-	{{#each slideshows}}
-		<div class="slideshow">
-			<div class="title-container"></div>
-			<div class="slides-container">
-				{{#each images}}
-					<div class="slide">
-						<img src="media/slideshow/{{url}}">
-					</div>
-				{{/each}}
+	<div class="top-slide">
+	</div>
+	<div class="all-slides-container">
+		{{#each slideshows}}
+			<div class="slideshow">
+				<div class="title-container">{{{title}}}</div>
+				<div class="slides-container">
+					{{#each images}}
+						<div class="slide">
+							<img src="media/slideshow/{{url}}">
+						</div>
+					{{/each}}
+				</div>
 			</div>
-		</div>
-	{{/each}}
+		{{/each}}
+	</div>
+	<div class="bottom-slide">
+		
+	</div>
 </div>

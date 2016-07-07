@@ -14,18 +14,49 @@ export default {
         '/home': {
             'slideshows': [
                 {
+                    title: 'I’M FROM ENGLAND',
                     images: [
                         { url: 'a/0.jpg' },
                         { url: 'a/1.jpg' }
                     ]
                 },
                 {
+                    title: 'I’VE GOT STYLE',
                     images: [
                         { url: 'a/1.jpg' },
                         { url: 'a/0.jpg' }
                     ]
                 },
                 {
+                    title: 'I’M UNFILTERED<br>AND EXTRA SMOOTH',
+                    images: [
+                        { url: 'a/0.jpg' },
+                        { url: 'a/1.jpg' }
+                    ]
+                },
+                {
+                    title: 'I’VE GOT GLORIOUS<br>ANCESTORS',
+                    images: [
+                        { url: 'a/0.jpg' },
+                        { url: 'a/1.jpg' }
+                    ]
+                },
+                {
+                    title: 'AND EXTATIC NEW<br>FRIENDS',
+                    images: [
+                        { url: 'a/0.jpg' },
+                        { url: 'a/1.jpg' }
+                    ]
+                },
+                {
+                    title: 'I CAN FLY',
+                    images: [
+                        { url: 'a/0.jpg' },
+                        { url: 'a/1.jpg' }
+                    ]
+                },
+                {
+                    title: 'I AM THE SQUADRON<br>303 VODKA',
                     images: [
                         { url: 'a/0.jpg' },
                         { url: 'a/1.jpg' }

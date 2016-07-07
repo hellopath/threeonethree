@@ -1,7 +1,6 @@
 import Page from '../Page'
 import Store from '../../store'
 import Utils from '../../utils'
-import Constants from '../../constants'
 import slideshow from './slideshow'
 import dom from 'dom-hand'
 import scrolltop from 'simple-scrolltop'
@@ -21,9 +20,13 @@ export default class Home extends Page {
         })
         dom.event.on(document, 'scroll', this.onScroll)
         super.componentDidMount()
+        this.checkScrollPosition()
     }
     onScroll(e) {
         e.preventDefault()
+        this.checkScrollPosition()
+    }
+    checkScrollPosition() {
         const windowH = Store.Window.h
         const top = scrolltop()
         this.slideshows.forEach((slide) => {
@@ -34,7 +37,6 @@ export default class Home extends Page {
             }
         })
     }
-    setupAnimations() {
         super.setupAnimations()
     }
     didTransitionInComplete() {
@@ -52,7 +54,6 @@ export default class Home extends Page {
         let slideYPos = 0
         this.slideshows.forEach((slide, i) => {
             slide.resize()
-            slide.el.style.top = slideYPos + 'px'
             slide.size[0] = windowW
             slide.size[1] = windowH
             slide.position[0] = 0
