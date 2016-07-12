@@ -24,7 +24,6 @@ export default (el)=> {
     const resize = () => {
         const windowW = Store.Window.w
         const windowH = Store.Window.h
-        const titleSize = dom.size(titleEl)
         const slideResizeVars = Utils.resizePositionProportionally(windowW, windowH, Constants.MEDIA_GLOBAL_W, Constants.MEDIA_GLOBAL_H)
         slides.forEach((slide, i) => {
             slide.container.style.left = (windowW * i) + 'px'
@@ -33,11 +32,7 @@ export default (el)=> {
             slide.img.style.left = slideResizeVars.left + 'px'
             slide.img.style.top = slideResizeVars.top + 'px'
         })
-        el.style.width = windowW + 'px'
-        el.style.height = windowH + 'px'
-
-        titleEl.style.left = (windowW >> 1) - (titleSize[0] >> 1) + 'px'
-        titleEl.style.top = (windowH >> 1) - (titleSize[1] >> 1) + 'px'
+        
     }
 
     const activate = () => {

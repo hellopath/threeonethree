@@ -7,11 +7,14 @@ import scrolltop from 'simple-scrolltop'
 
 export default class Home extends Page {
     constructor(props) {
+        props.data.logoUrl = Store.baseMediaPath() + 'media/logo-big.png'
         super(props)
         this.onScroll = this.onScroll.bind(this)
     }
     componentDidMount() {
         const slideshowsEl = dom.select.all('.slideshow')
+        this.bottomInside = dom.select('.bottom-slide .inside-container')
+        this.slideBlockEl = dom.select.all('.slide-block')
         this.slideshows = []
         slideshowsEl.forEach((el, i) => {
             const slide = slideshow(el)
@@ -37,6 +40,7 @@ export default class Home extends Page {
             }
         })
     }
+    setupAnimations() {
         super.setupAnimations()
     }
     didTransitionInComplete() {
@@ -51,6 +55,7 @@ export default class Home extends Page {
     resize() {
         const windowW = Store.Window.w
         const windowH = Store.Window.h
+        const bottomSize = dom.size(this.bottomInside)
         let slideYPos = 0
         this.slideshows.forEach((slide, i) => {
             slide.resize()
@@ -60,6 +65,11 @@ export default class Home extends Page {
             slide.position[1] = slideYPos
             slideYPos += windowH
         })
+        this.slideBlockEl.forEach((block) => {
+            block.style.width = windowW + 'px'
+            block.style.height = windowH + 'px'
+        })
+        this.bottomInside.style.top = (windowH >> 1) - (bottomSize[1] >> 1) + 'px'
         super.resize()
     }
     componentWillUnmount() {
