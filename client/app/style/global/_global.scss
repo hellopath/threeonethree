@@ -6,10 +6,10 @@ html, body {
     background-color: white;
     letter-spacing: 0.88px;
     line-height: $globalLineHeight;
-    background-color: #222322;
+    background-color: $gray;
 }
 
-html {
+html, body {
     @extend .full;
 }
 
@@ -51,10 +51,46 @@ html {
     position: absolute;
 }
 
-#preloader {
-    position: absolute;
-    z-index: 6;
-    @include opacity(0);
+#legal-age {
+    position: fixed;
+    @extend .full;
+    z-index: 9999999;
+    .inside-container {
+        position: relative;
+        @extend .full;
+        @include opacity(0);
+    }
+    .child {
+        $size: 17px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 4% 16%;
+        text-align: center;
+        font-size: $size;
+        line-height: $size;
+        text-transform: uppercase;
+        img {
+            width: 120px;
+        }
+        p.title {
+            padding-top: 40px;
+            width: 400px;
+        }
+        .buttons-container {
+            margin-top: 20px;
+        }
+        .legal-button {
+            text-align: center;
+            background-color: $gray;
+            width: 56px;
+            color: white;
+            padding: 4px 0;
+            @include inline-block;
+        }
+    }
 }
 
 #front-block {

@@ -56,7 +56,7 @@ export default class Home extends Page {
         const windowW = Store.Window.w
         const windowH = Store.Window.h
         const bottomSize = dom.size(this.bottomInside)
-        let slideYPos = 0
+        let slideYPos = windowH
         this.slideshows.forEach((slide, i) => {
             slide.resize()
             slide.size[0] = windowW

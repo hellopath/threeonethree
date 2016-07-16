@@ -32,7 +32,7 @@ export default (el)=> {
             slide.img.style.left = slideResizeVars.left + 'px'
             slide.img.style.top = slideResizeVars.top + 'px'
         })
-        
+        scope.slideToCurrent()
     }
 
     const activate = () => {
@@ -49,6 +49,10 @@ export default (el)=> {
 
     const nextSlide = () => {
         cc.inc()
+        scope.slideToCurrent()
+    }
+
+    const slideToCurrent = () => {
         const windowW = Store.Window.w
         const xPos = windowW * cc.props.index
         Utils.translate(slidesContainerEl, -xPos, 0, 0)
@@ -60,6 +64,7 @@ export default (el)=> {
         activate,
         deactivate,
         nextSlide,
+        slideToCurrent,
         id: undefined,
         position: [0, 0],
         size: [0, 0]
