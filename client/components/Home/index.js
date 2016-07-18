@@ -13,6 +13,8 @@ export default class Home extends Page {
     }
     componentDidMount() {
         const slideshowsEl = dom.select.all('.slideshow')
+        this.logoWrapper = dom.select('#logo-wrapper')
+        this.currentScroll = 0
         this.bottomInside = dom.select('.bottom-slide .inside-container')
         this.slideBlockEl = dom.select.all('.slide-block')
         this.slideshows = []
@@ -32,11 +34,15 @@ export default class Home extends Page {
     checkScrollPosition() {
         const windowH = Store.Window.h
         const top = scrolltop()
+        const direction = (this.currentScroll > top) ? -1 : 1
+        this.currentScroll = top
         this.slideshows.forEach((slide) => {
-            if (top + (windowH >> 1) > slide.position[1] && top < slide.position[1] + windowH) {
-                slide.activate()
+            if (top + (windowH * 0.3) > slide.position[1]) {
+                // console.log(slide.id, 'active')
+                slide.activate(direction)
             } else {
-                slide.deactivate()
+                // console.log(slide.id, 'deactive')
+                slide.deactivate(direction)
             }
         })
     }
@@ -44,6 +50,7 @@ export default class Home extends Page {
         super.setupAnimations()
     }
     didTransitionInComplete() {
+        this.logoWrapper.style.opacity = 1
         super.didTransitionInComplete()
     }
     willTransitionIn() {

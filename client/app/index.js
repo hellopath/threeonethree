@@ -35,15 +35,11 @@ class App {
         this.legal = {
             el: legalEl,
             tl: new TimelineMax({ onReverseComplete: this.onReverseCompleted }),
-            btns: btns
+            btns: btns,
+            legalChild, legalInside, legalImg, titleP
         }
 
-        this.legal.tl.to(legalInside, 0.4, { opacity:1, ease:Expo.easeOut }, 0)
-        this.legal.tl.from(legalChild, 1, { scaleX:1.1, scaleY:1.1, opacity:0, ease:Expo.easeOut }, 0)
-        this.legal.tl.from(legalImg, 1, { y:-20, opacity:0, ease:Expo.easeOut }, 0)
-        this.legal.tl.from(titleP, 1, { y:20, opacity:0, ease:Expo.easeOut }, 0.1)
-        this.legal.tl.staggerFrom(btns, 1, { y:20, opacity:0, ease:Expo.easeOut }, 0.05, 0.2)
-        this.legal.tl.pause(0)
+        this.addLegalAnimation()
 
         this.resize = this.resize.bind(this)
         Store.on(Constants.WINDOW_RESIZE, this.resize)
@@ -53,11 +49,23 @@ class App {
         dom.event.on(btns[0], 'click', this.yesClicked)
         dom.event.on(btns[1], 'click', this.noClicked)
     }
+    addLegalAnimation() {
+        this.legal.tl.clear()
+        this.legal.tl.from(this.legal, 0.1, { opacity:0, ease:Expo.easeOut }, 0)
+        this.legal.tl.to(this.legal.legalInside, 0.4, { opacity:1, ease:Expo.easeOut }, 0)
+        this.legal.tl.from(this.legal.legalChild, 1, { scaleX:1.1, scaleY:1.1, opacity:0, ease:Expo.easeOut }, 0)
+        this.legal.tl.from(this.legal.legalImg, 1, { y:-20, opacity:0, ease:Expo.easeOut }, 0)
+        this.legal.tl.from(this.legal.titleP, 1, { y:20, opacity:0, ease:Expo.easeOut }, 0.1)
+        this.legal.tl.staggerFrom(this.legal.btns, 1, { y:20, opacity:0, ease:Expo.easeOut }, 0.05, 0.2)
+        this.legal.tl.pause(0)
+    }
     loadMainAssets() {
         this.legal.tl.play(0)
     }
     onReverseCompleted() {
         this.legal.tl.clear()
+        dom.tree.remove(this.legal.el)
+        Store.off(Constants.WINDOW_RESIZE, this.resize)
         // Start routing
         setTimeout(()=>this.router.beginRouting())
         this.onAppReady()
@@ -74,6 +82,7 @@ class App {
         const windowH = Store.Window.h
         this.legal.el.style.width = windowW + 'px'
         this.legal.el.style.height = windowH + 'px'
+        // this.addLegalAnimation()
     }
     onAppReady() {
         setTimeout(()=>Actions.appStart())
