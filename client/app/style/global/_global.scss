@@ -11,6 +11,7 @@ html, body {
 
 html, body {
     @extend .full;
+    overflow: hidden;
 }
 
 #app-container  {
@@ -55,14 +56,14 @@ html, body {
     position: fixed;
     @extend .full;
     z-index: 9999999;
-    background-image: url("media/bristol_texture.jpg");
-    background-size: cover;
     .inside-container {
         position: relative;
         @extend .full;
         @include opacity(0);
     }
     .child {
+        background-image: url("media/bristol_texture.jpg");
+        background-size: cover;
         $size: 17px;
         position: absolute;
         top: 50%;

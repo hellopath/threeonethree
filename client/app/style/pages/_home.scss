@@ -1,5 +1,12 @@
 #home-page {
 	@extend .full;
+	position: absolute;
+	overflow: hidden;
+	.all-slides-holder {
+		overflow: hidden;
+		position: absolute;
+		@include simpleAnim(.7s, .0s, $easeOutExpo);
+	}
 	.all-slides-container {
 		position: relative;
 	}
@@ -70,6 +77,7 @@
 		}
 	}
 	.top-slide {
+		position: relative;
 		.arrow-holder {
 			$scale: 1.1;
 			$w: 32px * $scale;
@@ -104,6 +112,7 @@
 		position: relative;
 		.inside-container {
 			position: absolute;
+			@extend .full;
 		}
 		.social-holder {
 			margin: 40px 0;

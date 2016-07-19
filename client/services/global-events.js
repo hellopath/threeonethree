@@ -13,7 +13,7 @@ function mousemove(e) {
 	Store.Mouse.x = e.clientX
 	Store.Mouse.y = e.clientY
 	Store.Mouse.nX = (e.clientX / windowW) * 2 - 1
-	Store.Mouse.nY = (e.clientY / windowH) * 2 + 1
+	Store.Mouse.nY = (e.clientY / windowH) * 2 - 1
 }
 
 export function initGlobalEvents() {

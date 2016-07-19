@@ -57,7 +57,7 @@ class BasePager extends BaseComponent {
         if (oldComponent !== undefined) oldComponent.parent.style['z-index'] = 1
     }
     setupNewComponent(route, Type, tmpl) {
-        const id = Utils.capitalizeFirstLetter(route.parent.replace('/', ''))
+        const id = 'home'
         this.oldPageDivRef = this.currentPageDivRef
         this.currentPageDivRef = (this.currentPageDivRef === 'page-a') ? 'page-b' : 'page-a'
         const el = document.getElementById(this.currentPageDivRef)

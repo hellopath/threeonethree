@@ -8,14 +8,15 @@ export default (el)=> {
     let scope
     let isActive = false
     let intervalId
+    let fromTopTimeout, toTopTimeout
+    let pos = { x:0, y:0 }
     const slides = []
     const intervalTime = 2500
     const slidesContainerEl = dom.select('.slides-container', el)
     const titleEl = dom.select('.title-container', el)
+    const titleInside = dom.select('.vertical-center-child', titleEl)
     const fromTopTween = TweenMax.fromTo(titleEl, 1, { y:-10, scale:1.1, opacity:0, transformOrigin:'50% 50%', force3D:true }, { y:0, scale:1, opacity:1, force3D:true, transformOrigin:'50% 50%', ease:Expo.easeOut })
-    const toTopTween = TweenMax.to(titleEl, 1, { y:0, scale:1.1, opacity:0, transformOrigin:'50% 50%', ease:Expo.easeOut, force3D:true })
     fromTopTween.pause(0)
-    toTopTween.pause(0)
     dom.select.all('.slide', el).forEach((slide, i) => {
         const img = dom.select('img', slide)
         slides[i] = {
@@ -39,17 +40,27 @@ export default (el)=> {
         scope.slideToCurrent()
     }
 
+    const update = () => {
+        const x = Math.sin(Store.Mouse.nX) * 30
+        const y = Math.sin(Store.Mouse.nY) * 20
+        pos.x += (x - pos.x) * 0.08
+        pos.y += (y - pos.y) * 0.08
+        Utils.translate(titleInside, pos.x, pos.y, 1)
+    }
+
     const activate = (direction) => {
         if (isActive) return
         intervalId = setInterval(nextSlide, intervalTime)
-        setTimeout(() => { fromTopTween.timeScale(1).play(0) }, 300)
+        clearTimeout(fromTopTimeout)
+        fromTopTimeout = setTimeout(() => { fromTopTween.timeScale(1).play(0) }, 300)
         isActive = true
     }
 
     const deactivate = (direction) => {
         if (!isActive) return
         clearInterval(intervalId)
-        setTimeout(() => { toTopTween.timeScale(3.6).play(0) }, 300)
+        clearTimeout(toTopTimeout)
+        toTopTimeout = setTimeout(() => { fromTopTween.timeScale(3.6).reverse() }, 300)
         isActive = false
     }
 
@@ -71,6 +82,7 @@ export default (el)=> {
         deactivate,
         nextSlide,
         slideToCurrent,
+        update,
         id: undefined,
         position: [0, 0],
         size: [0, 0]

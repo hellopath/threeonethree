@@ -74,8 +74,17 @@ class App {
         e.preventDefault()
         this.legal.tl.timeScale(2).reverse()
     }
-    noClicked() {
+    noClicked(e) {
         e.preventDefault()
+        const links = [
+            'https://www.youtube.com/watch?v=RJFI6yIgZhY',
+            'https://www.youtube.com/watch?v=1JJJtSfAZyE',
+            'https://gfycat.com/ParallelMemorableGoat',
+            'http://i.imgur.com/0Gh095v.gifv',
+            'http://i.imgur.com/nIzk6Um.jpg'
+        ]
+        const rand = Math.floor(Math.random() * links.length)
+        window.open(links[rand])
     }
     resize() {
         const windowW = Store.Window.w

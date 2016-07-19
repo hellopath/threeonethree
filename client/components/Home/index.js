@@ -4,47 +4,79 @@ import Utils from '../../utils'
 import slideshow from './slideshow'
 import dom from 'dom-hand'
 import scrolltop from 'simple-scrolltop'
+import inertia from 'wheel-inertia'
+import { addWheelListener } from 'wheel'
+import raf from 'raf'
+import Hammer from 'hammerjs'
 
 export default class Home extends Page {
     constructor(props) {
         props.data.logoUrl = Store.baseMediaPath() + 'media/logo-big.png'
         super(props)
-        this.onScroll = this.onScroll.bind(this)
+        this.didInertia = this.didInertia.bind(this)
+        this.didWheel = this.didWheel.bind(this)
+        this.animate = this.animate.bind(this)
     }
     componentDidMount() {
         const slideshowsEl = dom.select.all('.slideshow')
+        this.slidesHolder = dom.select('.all-slides-holder')
         this.logoWrapper = dom.select('#logo-wrapper')
-        this.currentScroll = 0
-        this.bottomInside = dom.select('.bottom-slide .inside-container')
         this.slideBlockEl = dom.select.all('.slide-block')
         this.slideshows = []
+        this.currentSlideIndex = 0
+        this.slideshowIndex = 0
+        this.oldSlideshow = undefined
+        this.newSlideshow = undefined
         slideshowsEl.forEach((el, i) => {
             const slide = slideshow(el)
             slide.id = i
             this.slideshows[i] = slide
         })
-        dom.event.on(document, 'scroll', this.onScroll)
-        super.componentDidMount()
-        this.checkScrollPosition()
-    }
-    onScroll(e) {
-        e.preventDefault()
-        this.checkScrollPosition()
-    }
-    checkScrollPosition() {
-        const windowH = Store.Window.h
-        const top = scrolltop()
-        const direction = (this.currentScroll > top) ? -1 : 1
-        this.currentScroll = top
-        this.slideshows.forEach((slide) => {
-            if (top + (windowH * 0.3) > slide.position[1]) {
-                // console.log(slide.id, 'active')
-                slide.activate(direction)
-            } else {
-                // console.log(slide.id, 'deactive')
-                slide.deactivate(direction)
-            }
+
+        addWheelListener(document, this.didWheel)
+        inertia.addCallback(this.didInertia)
+
+        const hammertime = new Hammer(document)
+        hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+        hammertime.on('swipe', (ev) => {
+            if (ev.deltaY < 0) this.changeIndexByDirection(-1)
+            else this.changeIndexByDirection(1)
         })
+
+        this.animate()
+        super.componentDidMount()
+    }
+    animate() {
+        if (this.newSlideshow) {
+            this.newSlideshow.update()
+        }
+        this.rafId = raf(this.animate)
+    }
+    didWheel(e) {
+        const delta = e.wheelDelta
+        inertia.update(delta)
+    }
+    didInertia(dir) {
+        this.changeIndexByDirection(dir)
+    }
+    changeIndexByDirection(dir) {
+        if (dir === 1) this.currentSlideIndex--
+        else this.currentSlideIndex++
+        if (this.currentSlideIndex < 0) this.currentSlideIndex = 0
+        if (this.currentSlideIndex > this.slideshows.length + 1) this.currentSlideIndex = 0
+        this.scrollNext()
+    }
+    scrollNext() {
+        const windowH = Store.Window.h
+        const pos = this.currentSlideIndex * windowH
+        const slideshowItemIndex = this.currentSlideIndex - 1
+        TweenMax.set(this.slidesHolder, { y:-pos, force3D:true })
+        if (slideshowItemIndex >= 0 && slideshowItemIndex < this.slideshows.length) {
+            this.oldSlideshow = this.newSlideshow
+            this.newSlideshow = this.slideshows[slideshowItemIndex]
+            this.newSlideshow.activate()
+            if (this.oldSlideshow) this.oldSlideshow.deactivate()
+        }
     }
     setupAnimations() {
         super.setupAnimations()
@@ -62,7 +94,6 @@ export default class Home extends Page {
     resize() {
         const windowW = Store.Window.w
         const windowH = Store.Window.h
-        const bottomSize = dom.size(this.bottomInside)
         let slideYPos = windowH
         this.slideshows.forEach((slide, i) => {
             slide.resize()
@@ -76,7 +107,7 @@ export default class Home extends Page {
             block.style.width = windowW + 'px'
             block.style.height = windowH + 'px'
         })
-        this.bottomInside.style.top = (windowH >> 1) - (bottomSize[1] >> 1) + 'px'
+        this.scrollNext()
         super.resize()
     }
     componentWillUnmount() {

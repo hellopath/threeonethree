@@ -8,10 +8,10 @@ export default {
         'women_shop_url': 'http://www.camper.com/int/women/shoes/ss16_inspiration',
     },
 
-    'default-route': '/home',
+    'default-route': '/',
 
     'routing': {
-        '/home': {
+        '/': {
             'slideshows': [
                 {
                     title: 'I’M FROM ENGLAND',

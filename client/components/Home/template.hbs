@@ -1,47 +1,51 @@
 <div id="home-page" class="page-wrapper">
-	<div class="top-slide slide-block">
-		<table id="logo-wrapper">
-			<tr>
-				<td><img src={{logoUrl}} alt="" /></td>
-			</tr>
-		</table>
-		<div class="arrow-holder">
-			<svg width="100%" viewBox="0 0 43.841 23.334">
-				<polygon fill="#ffffff" points="21.92,23.084 0.47,1.634 1.854,0.25 21.92,20.317 41.987,0.25 43.371,1.634 "/>
-			</svg>
+	<div class="all-slides-holder">
+		<div class="top-slide slide-block">
+			<table id="logo-wrapper">
+				<tr>
+					<td><img src={{logoUrl}} alt="" /></td>
+				</tr>
+			</table>
+			<div class="arrow-holder">
+				<svg width="100%" viewBox="0 0 43.841 23.334">
+					<polygon fill="#ffffff" points="21.92,23.084 0.47,1.634 1.854,0.25 21.92,20.317 41.987,0.25 43.371,1.634 "/>
+				</svg>
+			</div>
 		</div>
-	</div>
-	<div class="all-slides-container">
-		{{#each slideshows}}
-			<div class="slideshow slide-block">
-				<div class="title-container title">
-					<div class="vertical-center-parent">
-						<div class="vertical-center-child">{{{title}}}</div>
+		<div class="all-slides-container">
+			{{#each slideshows}}
+				<div class="slideshow slide-block">
+					<div class="title-container title">
+						<div class="vertical-center-parent">
+							<div class="vertical-center-child">{{{title}}}</div>
+						</div>
+					</div>
+					<div class="slides-container">
+						{{#each images}}
+							<div class="slide">
+								<img src="media/slideshow/{{url}}">
+							</div>
+						{{/each}}
 					</div>
 				</div>
-				<div class="slides-container">
-					{{#each images}}
-						<div class="slide">
-							<img src="media/slideshow/{{url}}">
-						</div>
-					{{/each}}
+			{{/each}}
+		</div>
+		<div class="bottom-slide slide-block">
+			<div class="inside-container vertical-center-parent">
+				<div class="vertical-center-child">
+					<img class="logo" src={{logoUrl}} />
+					<p class="title">ORIGINALLY DISTILLED IN ENGLAND BY POLISH HEROES</p>
+					<div class="social-holder">
+						<a href="#" target="_blank">
+							<svg width="100%" viewBox="0 0 454.648 454.648"><path fill="#010101" d="M316.359,204.592l0.001,90.93c0,11.367-9.472,20.838-20.84,20.838H159.127c-11.366,0-20.838-9.471-20.838-20.838v-90.93h33.151c-2.841,6.63-4.736,15.155-4.736,22.732c0,33.152,27.469,60.621,60.62,60.621s60.62-27.469,60.62-60.621c0-7.577-1.896-16.103-4.735-22.732H316.359z M312.571,146.813v-4.736h-4.736h-33.151v37.887h37.888V146.813z M227.324,266.158c20.837,0,38.834-17.049,38.834-38.834c0-8.525-2.84-16.102-7.576-22.732c-6.631-9.472-18.943-16.102-31.258-16.102c-12.313,0-24.626,6.629-31.257,16.102c-4.736,6.63-7.577,14.208-7.577,22.732C188.49,249.109,206.486,266.158,227.324,266.158z M454.648,227.324c0,125.547-101.777,227.324-227.324,227.324C101.776,454.648,0,352.871,0,227.324C0,101.776,101.776,0,227.324,0C352.871,0,454.648,101.776,454.648,227.324z M338.145,159.127c0-23.68-18.944-42.624-42.624-42.624H159.127c-23.68,0-42.624,18.944-42.624,42.624v45.465v90.93c0,23.68,18.944,42.623,42.624,42.623h136.394c23.68,0,42.624-18.943,42.624-42.623v-90.93V159.127z"/></svg>
+						</a>
+						<a href="#" target="_blank">
+							<svg width="100%" viewBox="0 0 466.648 466.648"><path fill="#FFFFFF" d="M233.324,0C104.463,0,0,104.463,0,233.324c0,128.862,104.463,233.324,233.324,233.324s233.324-104.462,233.324-233.324C466.648,104.463,362.186,0,233.324,0z M279.661,155.432l-19.494,0.009c-15.285,0-18.244,7.264-18.244,17.922v23.504h36.453l-4.746,36.812h-31.707v94.461l-38.017,0.002v-94.461h-31.788v-36.813h31.789v-27.149c0-31.506,19.242-48.661,47.348-48.661c13.463,0,25.033,1.002,28.406,1.449V155.432z"/></svg>
+						</a>
+					</div>
+					<p class="moderation">L’ABUS D’ALCOOL EST DANGEREUX POUR LA SANTÉ. A CONSOMMER AVEC MODÉRATION</p>
 				</div>
 			</div>
-		{{/each}}
-	</div>
-	<div class="bottom-slide slide-block">
-		<div class="inside-container">
-			<img class="logo" src={{logoUrl}} />
-			<p class="title">ORIGINALLY DISTILLED IN ENGLAND BY POLISH HEROES</p>
-			<div class="social-holder">
-				<a href="#" target="_blank">
-					<svg width="100%" viewBox="0 0 454.648 454.648"><path fill="#010101" d="M316.359,204.592l0.001,90.93c0,11.367-9.472,20.838-20.84,20.838H159.127c-11.366,0-20.838-9.471-20.838-20.838v-90.93h33.151c-2.841,6.63-4.736,15.155-4.736,22.732c0,33.152,27.469,60.621,60.62,60.621s60.62-27.469,60.62-60.621c0-7.577-1.896-16.103-4.735-22.732H316.359z M312.571,146.813v-4.736h-4.736h-33.151v37.887h37.888V146.813z M227.324,266.158c20.837,0,38.834-17.049,38.834-38.834c0-8.525-2.84-16.102-7.576-22.732c-6.631-9.472-18.943-16.102-31.258-16.102c-12.313,0-24.626,6.629-31.257,16.102c-4.736,6.63-7.577,14.208-7.577,22.732C188.49,249.109,206.486,266.158,227.324,266.158z M454.648,227.324c0,125.547-101.777,227.324-227.324,227.324C101.776,454.648,0,352.871,0,227.324C0,101.776,101.776,0,227.324,0C352.871,0,454.648,101.776,454.648,227.324z M338.145,159.127c0-23.68-18.944-42.624-42.624-42.624H159.127c-23.68,0-42.624,18.944-42.624,42.624v45.465v90.93c0,23.68,18.944,42.623,42.624,42.623h136.394c23.68,0,42.624-18.943,42.624-42.623v-90.93V159.127z"/></svg>
-				</a>
-				<a href="#" target="_blank">
-					<svg width="100%" viewBox="0 0 466.648 466.648"><path fill="#FFFFFF" d="M233.324,0C104.463,0,0,104.463,0,233.324c0,128.862,104.463,233.324,233.324,233.324s233.324-104.462,233.324-233.324C466.648,104.463,362.186,0,233.324,0z M279.661,155.432l-19.494,0.009c-15.285,0-18.244,7.264-18.244,17.922v23.504h36.453l-4.746,36.812h-31.707v94.461l-38.017,0.002v-94.461h-31.788v-36.813h31.789v-27.149c0-31.506,19.242-48.661,47.348-48.661c13.463,0,25.033,1.002,28.406,1.449V155.432z"/></svg>
-				</a>
-			</div>
-			<p class="moderation">L’ABUS D’ALCOOL EST DANGEREUX POUR LA SANTÉ. A CONSOMMER AVEC MODÉRATION</p>
 		</div>
 	</div>
 </div>
