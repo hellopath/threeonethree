@@ -1,5 +1,6 @@
 import Page from '../Page'
 import Store from '../../store'
+import Constants from '../../constants'
 import Utils from '../../utils'
 import slideshow from './slideshow'
 import dom from 'dom-hand'
@@ -12,6 +13,7 @@ import Hammer from 'hammerjs'
 export default class Home extends Page {
     constructor(props) {
         props.data.logoUrl = Store.baseMediaPath() + 'media/logo-big.png'
+        props.data.bottomImgSrc = Store.baseMediaPath() + 'media/slideshow/g/0.jpg'
         super(props)
         this.didInertia = this.didInertia.bind(this)
         this.didWheel = this.didWheel.bind(this)
@@ -22,6 +24,8 @@ export default class Home extends Page {
         this.slidesHolder = dom.select('.all-slides-holder')
         this.logoWrapper = dom.select('#logo-wrapper')
         this.slideBlockEl = dom.select.all('.slide-block')
+        this.bottomSlide = dom.select('.bottom-slide')
+        this.bottomImg = dom.select('.bottom-slide .background')
         this.slideshows = []
         this.currentSlideIndex = 0
         this.slideshowIndex = 0
@@ -71,11 +75,19 @@ export default class Home extends Page {
         const pos = this.currentSlideIndex * windowH
         const slideshowItemIndex = this.currentSlideIndex - 1
         TweenMax.set(this.slidesHolder, { y:-pos, force3D:true })
+
+
         if (slideshowItemIndex >= 0 && slideshowItemIndex < this.slideshows.length) {
             this.oldSlideshow = this.newSlideshow
             this.newSlideshow = this.slideshows[slideshowItemIndex]
             this.newSlideshow.activate()
             if (this.oldSlideshow) this.oldSlideshow.deactivate()
+        }
+
+        if (this.currentSlideIndex === this.slideshows.length + 1) {
+            dom.classes.add(this.bottomSlide, 'active')
+        } else {
+            dom.classes.remove(this.bottomSlide, 'active')
         }
     }
     setupAnimations() {
@@ -107,6 +119,12 @@ export default class Home extends Page {
             block.style.width = windowW + 'px'
             block.style.height = windowH + 'px'
         })
+        const bottomImgVars = Utils.resizePositionProportionally(windowW, windowH, Constants.MEDIA_GLOBAL_W, Constants.MEDIA_GLOBAL_H)
+        this.bottomImg.style.width = bottomImgVars.width + 'px'
+        this.bottomImg.style.height = bottomImgVars.height + 'px'
+        this.bottomImg.style.top = bottomImgVars.top + 'px'
+        this.bottomImg.style.left = bottomImgVars.left + 'px'
+
         this.scrollNext()
         super.resize()
     }

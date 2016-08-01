@@ -11,9 +11,10 @@
 		position: relative;
 	}
 	.title {
-		$fontsize: 60px;
-		$lineheight: 90px;
+		$fontsize: 124px;
+		$lineheight: $fontsize;
 		$letterspacing: 12px;
+		font-family: 'Press';
 		line-height: $lineheight;
 		font-size: $fontsize;
 		letter-spacing: $letterspacing;
@@ -43,6 +44,16 @@
 			height: 100%;
 			.vertical-center-child {
 				padding: 0 60px;
+			}
+			p {
+				@include courier();
+				font-size: 21px;
+				line-height: 30px;
+				letter-spacing: 0px;
+				width: 70%;
+				position: relative;
+				left: 15%;
+				font-weight: bold;
 			}
 		}
 		.slide {
@@ -110,6 +121,17 @@
 	.bottom-slide {
 		text-align: center;
 		position: relative;
+		&.active {
+			.background {
+				@include opacity(0.2);
+				@include simpleAnim(.8s, .0s, $easeOutQuint);
+			}
+		}
+		.background {
+			position: absolute;
+			@include opacity(1);
+			@include simpleAnim(.2s, .0s, $easeOutQuint);
+		}
 		.inside-container {
 			position: absolute;
 			@extend .full;
@@ -163,9 +185,10 @@
 		}
 		p.moderation {
 			$size: 14px;
-			font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+			@include courier();
 			font-size: $size;
 			line-height: $size;
+			font-weight: bold;
 			color: white;
 		}
 	}

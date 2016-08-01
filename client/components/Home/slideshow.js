@@ -53,6 +53,7 @@ export default (el)=> {
         intervalId = setInterval(nextSlide, intervalTime)
         clearTimeout(fromTopTimeout)
         fromTopTimeout = setTimeout(() => { fromTopTween.timeScale(1).play(0) }, 300)
+        dom.classes.add(el, 'active')
         isActive = true
     }
 
@@ -61,6 +62,7 @@ export default (el)=> {
         clearInterval(intervalId)
         clearTimeout(toTopTimeout)
         toTopTimeout = setTimeout(() => { fromTopTween.timeScale(3.6).reverse() }, 300)
+        dom.classes.remove(el, 'active')
         isActive = false
     }
 

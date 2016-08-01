@@ -6,3 +6,9 @@
 	font-size: 16px;
     letter-spacing: 0.88px;
 }
+
+@mixin courier() {
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+	font-style: normal;
+	font-variant: normal;
+}

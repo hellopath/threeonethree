@@ -17,7 +17,10 @@
 				<div class="slideshow slide-block">
 					<div class="title-container title">
 						<div class="vertical-center-parent">
-							<div class="vertical-center-child">{{{title}}}</div>
+							<div class="vertical-center-child">
+								{{{title}}}
+								<p>{{{paragraph}}}</p>
+							</div>
 						</div>
 					</div>
 					<div class="slides-container">
@@ -31,6 +34,7 @@
 			{{/each}}
 		</div>
 		<div class="bottom-slide slide-block">
+			<div class="background"><img src="{{bottomImgSrc}}"></div>
 			<div class="inside-container vertical-center-parent">
 				<div class="vertical-center-child">
 					<img class="logo" src={{logoUrl}} />

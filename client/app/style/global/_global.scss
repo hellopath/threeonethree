@@ -2,8 +2,8 @@
 html, body {
     padding: 0;
     margin: 0;
-    font-family: "Apercu";
-    background-color: white;
+    @include courier();
+    // font-family: "courier";
     letter-spacing: 0.88px;
     line-height: $globalLineHeight;
     background-color: $gray;
@@ -83,7 +83,9 @@ html, body {
             width: 400px;
         }
         .buttons-container {
+            font-family: "Press";
             margin-top: 20px;
+            font-size: 20px;
         }
         .legal-button {
             text-align: center;
