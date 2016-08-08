@@ -61,26 +61,34 @@ html, body {
         @extend .full;
         @include opacity(0);
     }
+    #logo-wrapper {
+        width: $spriteW * 0.4;
+        height: 460px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        position: relative;
+        margin: 0 auto;
+        top: -$overallMargin * 2;
+    }
     .child {
         background-image: url("media/bristol_texture.jpg");
-        background-size: cover;
         $size: 17px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: relative;
         background-color: white;
-        padding: 4% 16%;
         text-align: center;
         font-size: $size;
         line-height: $size;
         text-transform: uppercase;
+        max-width: $MQ_MEDIUM;
+        margin: 0 auto;
         img {
             width: 120px;
         }
         p.title {
             padding-top: 40px;
-            width: 400px;
+            position: relative;
+            top: -$overallMargin * 1.7;
         }
         .buttons-container {
             font-family: "Press";
@@ -93,6 +101,8 @@ html, body {
             width: 56px;
             color: white;
             padding: 4px 0;
+            position: relative;
+            top: -$overallMargin;
             @include inline-block;
         }
     }

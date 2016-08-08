@@ -32,6 +32,9 @@ export default {
         }
     },
 
+    LOGO_W: 444,
+    LOGO_H: 1402,
+
     MEDIA_GLOBAL_W: 1920,
     MEDIA_GLOBAL_H: 1080,
 

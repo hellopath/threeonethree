@@ -7,6 +7,7 @@ import Template from './app-template'
 import Router from '../services/router'
 import { initGlobalEvents } from '../services/global-events'
 import dom from 'dom-hand'
+import Cookies from 'js-cookie'
 
 class App {
     constructor() {
@@ -28,7 +29,7 @@ class App {
         const legalEl = dom.select('#legal-age', document)
         const legalChild = dom.select('.child', legalEl)
         const legalInside = dom.select('.inside-container', legalEl)
-        const legalImg = dom.select('img', legalEl)
+        const legalImg = dom.select('#logo-wrapper', legalEl)
         const titleP = dom.select('p.title', legalEl)
         const btns = dom.select.all('.legal-button', legalEl)
         this.onReverseCompleted = this.onReverseCompleted.bind(this)
@@ -39,7 +40,14 @@ class App {
             legalChild, legalInside, legalImg, titleP
         }
 
-        this.addLegalAnimation()
+        this.logoSprite = new Motio(legalImg, {
+            fps: 30,
+            frames: 24,
+            width: 444 * 0.4,
+            height: 1402 * 0.4
+        })
+
+        
 
         this.resize = this.resize.bind(this)
         Store.on(Constants.WINDOW_RESIZE, this.resize)
@@ -48,6 +56,14 @@ class App {
         this.noClicked = this.noClicked.bind(this)
         dom.event.on(btns[0], 'click', this.yesClicked)
         dom.event.on(btns[1], 'click', this.noClicked)
+
+        if (Cookies.get('legaluser') === true.toString()) {
+            setTimeout(() => {
+                this.onReverseCompleted()
+            }, 500)
+        } else {
+            this.addLegalAnimation()
+        }
     }
     addLegalAnimation() {
         this.legal.tl.clear()
@@ -60,6 +76,7 @@ class App {
         this.legal.tl.pause(0)
     }
     loadMainAssets() {
+        this.logoSprite.toEnd()
         this.legal.tl.play(0)
     }
     onReverseCompleted() {
@@ -91,9 +108,9 @@ class App {
         const windowH = Store.Window.h
         this.legal.el.style.width = windowW + 'px'
         this.legal.el.style.height = windowH + 'px'
-        // this.addLegalAnimation()
     }
     onAppReady() {
+        Cookies.set('legaluser', true)
         setTimeout(()=>Actions.appStart())
         setTimeout(()=>Actions.routeChanged())
     }

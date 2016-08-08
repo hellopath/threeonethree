@@ -50,10 +50,17 @@
 				font-size: 21px;
 				line-height: 30px;
 				letter-spacing: 0px;
-				width: 70%;
 				position: relative;
-				left: 15%;
+				width: 50%;
+				left: 25%;
 				font-weight: bold;
+				margin-top: $overallMargin / 2;
+				@include max-screen($MQ_MEDIUM) {
+					font-size: 16px;
+					line-height: 24px;
+					width: 70%;
+					left: 15%;
+				}
 			}
 		}
 		.slide {
@@ -66,26 +73,20 @@
 			}
 		}
 	}
-	table#logo-wrapper {
-		$w: 150px;
-		$h: 90%;
-		width: $w;
-		height: $h;
+	#logo-wrapper {
+		width: $spriteW * 0.4;
+		height: $spriteH * 0.4;
 		margin: 0;
 		padding: 0;
 		border: 0;
+		position: absolute;
+	}
+	.bottom-slide #logo-wrapper {
+		position: relative;
+		width: $spriteW * 0.4;
+		height: 500px;
+		top: -$overallMargin;
 		margin: 0 auto;
-		@include opacity(0);
-		@include simpleAnim(.8s, .2s, $easeOutExpo);
-		td {
-			vertical-align: middle;
-			text-align: center;
-		}
-		@include max-screen($MQ_MEDIUM) {
-			$scale: 0.8;
-			width: $w * $scale;
-			height: $h;
-		}
 	}
 	.top-slide {
 		position: relative;
@@ -135,11 +136,17 @@
 		.inside-container {
 			position: absolute;
 			@extend .full;
+			@include max-screen($MQ_MEDIUM) {
+				top: - $overallMargin * 1.4;
+			}
 		}
 		.social-holder {
-			margin: 40px 0;
+			margin: 20px 0;
+			position: relative;
+			top: - $overallMargin;
 			@include max-screen($MQ_MEDIUM) {
 				width: 100%;
+				top: - $overallMargin * 1.3;
 			}
 		}
 		img.logo {
@@ -164,20 +171,30 @@
 			color: white;
 			padding: 0 21%;
     		letter-spacing: 3px;
+    		position: relative;
+			top: - $overallMargin;
 			@include max-screen($MQ_MEDIUM) {
 				$scale: 0.6;
 				font-size: $fontsize * $scale;
 				line-height: $lineheight * $scale;
+				padding: 0 2%;
+				top: - $overallMargin * 1.4;
 			}
 		}
 		.social-holder {
 			width: 100%;
+			position: relative;
 			a {
 				$size: 38px;
 				width: $size;
 				height: $size;
 				@include inline-block;
 				padding: 0 5px;
+				@include max-screen($MQ_MEDIUM) {
+					$size: 28px;
+					width: $size;
+					height: $size;
+				}
 			}
 			svg path {
 				fill: white;
@@ -185,11 +202,18 @@
 		}
 		p.moderation {
 			$size: 14px;
-			@include courier();
 			font-size: $size;
+			@include courier();
 			line-height: $size;
 			font-weight: bold;
 			color: white;
+			position: relative;
+			top: - $overallMargin * 0.8;
+			@include max-screen($MQ_MEDIUM) {
+				$size: 10px;
+				font-size: $size;
+				top: - $overallMargin * 1.2;
+			}
 		}
 	}
 }

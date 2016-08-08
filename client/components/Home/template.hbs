@@ -1,12 +1,8 @@
 <div id="home-page" class="page-wrapper">
 	<div class="all-slides-holder">
 		<div class="top-slide slide-block">
-			<table id="logo-wrapper">
-				<tr>
-					<td><img src={{logoUrl}} alt="" /></td>
-				</tr>
-			</table>
-			<div class="arrow-holder">
+			<div id="logo-wrapper" style="background-image: url({{logoUrl}});"></div>
+			<div class="arrow-holder btn">
 				<svg width="100%" viewBox="0 0 43.841 23.334">
 					<polygon fill="#ffffff" points="21.92,23.084 0.47,1.634 1.854,0.25 21.92,20.317 41.987,0.25 43.371,1.634 "/>
 				</svg>
@@ -18,7 +14,7 @@
 					<div class="title-container title">
 						<div class="vertical-center-parent">
 							<div class="vertical-center-child">
-								{{{title}}}
+								<div class="main-title">{{{title}}}</div>
 								<p>{{{paragraph}}}</p>
 							</div>
 						</div>
@@ -37,7 +33,7 @@
 			<div class="background"><img src="{{bottomImgSrc}}"></div>
 			<div class="inside-container vertical-center-parent">
 				<div class="vertical-center-child">
-					<img class="logo" src={{logoUrl}} />
+					<div id="logo-wrapper" style="background-image: url({{logoUrl}});"></div>
 					<p class="title">ORIGINALLY DISTILLED IN ENGLAND BY POLISH HEROES</p>
 					<div class="social-holder">
 						<a href="#" target="_blank">
