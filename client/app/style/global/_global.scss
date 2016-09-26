@@ -62,14 +62,19 @@ html, body {
         @include opacity(0);
     }
     #logo-wrapper {
-        width: $spriteW * 0.4;
-        height: 460px;
+        width: 200px * 0.6;
+        height: 433px * 0.6;
         margin: 0;
         padding: 0;
         border: 0;
         position: relative;
         margin: 0 auto;
-        top: -$overallMargin * 2;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-origin: content-box;
+        padding-top: 50px;
+        padding-bottom: 70px;
+        // top: -$overallMargin * 2;
     }
     .child {
         background-image: url("media/bristol_texture.jpg");

@@ -1,11 +1,11 @@
 export default {
     'content': {
-        'twitter_url': 'https://twitter.com/camper',
-        'facebook_url': 'https://www.facebook.com/Camper',
-        'instagram_url': 'https://instagram.com/camper/',
-        'lab_url': 'http://www.camper.com/lab',
-        'men_shop_url': 'http://www.camper.com/int/men/shoes/ss16_inspiration',
-        'women_shop_url': 'http://www.camper.com/int/women/shoes/ss16_inspiration',
+        // 'twitter_url': 'https://twitter.com/camper',
+        // 'facebook_url': 'https://www.facebook.com/Camper',
+        // 'instagram_url': 'https://instagram.com/camper/',
+        // 'lab_url': 'http://www.camper.com/lab',
+        // 'men_shop_url': 'http://www.camper.com/int/men/shoes/ss16_inspiration',
+        // 'women_shop_url': 'http://www.camper.com/int/women/shoes/ss16_inspiration',
     },
 
     'default-route': '/',
@@ -62,9 +62,9 @@ export default {
                     title: 'I CAN FLY',
                     paragraph: 'Just like the Polish pilots 75 years ago, the founders of the brand put in a Spitfire extra tanker the first 50 litters of the Squadron 303 vodka to cool it down.',
                     images: [
-                        { url: 'f/0.jpg' },
-                        { url: 'f/1.jpg' },
-                        { url: 'f/2.jpg' }
+                        { url: 'f/0.jpg' }
+                        // { url: 'f/1.jpg' },
+                        // { url: 'f/2.jpg' }
                     ]
                 }
             ]

@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 3000",
+    "start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 3000 --host localhost",
     "build": "NODE_ENV=production webpack --progress --colors",
     "lint": "eslint --color --config .eslintrc --ext .js client"
   },
@@ -21,7 +21,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "babel-runtime": "^6.5.0",
-    "ccounter": "^1.1.0",
+    "ccounter": "^1.1.1",
     "classnames": "^2.2.3",
     "css-loader": "^0.23.1",
     "dom-hand": "^1.0.2",
@@ -41,7 +41,7 @@
     "img": "^3.0.3",
     "is-retina": "^1.0.3",
     "js-cookie": "^2.1.2",
-    "mini-video": "^1.0.1",
+    "mini-video": "^1.0.4",
     "mobile-detect": "^1.3.2",
     "node-sass": "^3.8.0",
     "object-assign": "^3.0.0",

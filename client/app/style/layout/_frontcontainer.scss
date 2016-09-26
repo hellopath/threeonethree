@@ -2,4 +2,52 @@
 	position: fixed;
 	z-index: 20;
 	text-transform: uppercase;
+	.menu {
+		$size: 9px;
+		$margin: 14px;
+		$totalH: ($size + ($margin * 1.5)) * 8;
+		position: fixed;
+		right: $overallMargin / 2;
+		top: 50%;
+		margin-top: -$totalH/2;
+		@include max-screen($MQ_MEDIUM) {
+			display: none;
+		}
+		@include anim(.6s, .0s, $easeOutQuint, translateX($overallMargin * 2));
+		&.active {
+			@include anim(.6s, .0s, $easeOutQuint, translateX(0px));
+		}
+		li {
+			width: $size;
+			height: $size;
+			margin: $margin 0;
+			&.highlight, &.active {
+				svg {
+					&.top {
+						@include anim(.6s, .1s, $easeOutQuint, scale(1.4));
+					}
+					&.bottom {
+						@include anim(.5s, .0s, $easeOutQuint, scale(1.6));
+					}
+				}
+			}
+			svg {
+				position: absolute;
+				&.top {
+					z-index: 2;
+					@include anim(.4s, .0s, $easeOutQuint, scale(0.8));
+					circle {
+						fill: $white;
+					}
+				}
+				&.bottom {
+					@include anim(.4s, .0s, $easeOutQuint, scale(1));
+					z-index: 1;
+					circle {
+						fill: $white;
+					}
+				}
+			}
+		}
+	}
 }

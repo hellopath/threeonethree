@@ -51,6 +51,18 @@ const Actions = {
             actionType: Constants.APP_START,
             item: undefined
         })
+    },
+    updateMenu: (id) => {
+        Dispatcher.handleViewAction({
+            actionType: Constants.UPDATE_MENU,
+            item: id
+        })  
+    },
+    updateSlideshowById: (id) => {
+        Dispatcher.handleViewAction({
+            actionType: Constants.UPDATE_SLIDESHOW,
+            item: id
+        })  
     }
 }
 

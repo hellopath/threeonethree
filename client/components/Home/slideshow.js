@@ -7,6 +7,7 @@ import counter from 'ccounter'
 export default (el)=> {
     let scope
     let isActive = false
+    let isDeactive = true
     let intervalId
     let fromTopTimeout, toTopTimeout, toBottomTimeout
     let pos = { x:0, y:0 }
@@ -17,13 +18,16 @@ export default (el)=> {
     const titleInside = dom.select('.vertical-center-child div', titleEl)
     const descriptionInside = dom.select('.vertical-center-child p', titleEl)
     const fromTopTween = new TimelineMax()
+    const fromBottomTween = new TimelineMax()
+    fromTopTween.clear()
+    fromBottomTween.clear()
     fromTopTween.fromTo(titleInside, 1, { y:200, opacity:0, force3D:true }, { y:0, opacity:1, force3D:true, ease:Expo.easeOut }, 0)
     fromTopTween.fromTo(descriptionInside, 1, { y:240, opacity:0, force3D:true }, { y:0, opacity:1, force3D:true, ease:Expo.easeOut }, 0.1)
-    fromTopTween.pause(0)
-    const fromBottomTween = new TimelineMax()
     fromBottomTween.fromTo(titleInside, 1, { y:-240, opacity:0, force3D:true }, { y:0, opacity:1, force3D:true, ease:Expo.easeOut }, 0.1)
     fromBottomTween.fromTo(descriptionInside, 1, { y:-200, opacity:0, force3D:true }, { y:0, opacity:1, force3D:true, ease:Expo.easeOut }, 0)
+    fromTopTween.pause(0)
     fromBottomTween.pause(0)
+    
     dom.select.all('.slide', el).forEach((slide, i) => {
         const img = dom.select('img', slide)
         slides[i] = {
@@ -56,24 +60,24 @@ export default (el)=> {
     }
 
     const activate = (direction) => {
+        isDeactive = false
         if (isActive) return
-        intervalId = setTimeout(scope.nextSlide, intervalTime)
+        // intervalId = setTimeout(scope.nextSlide, intervalTime)
         clearTimeout(fromTopTimeout)
         if (direction === 1) fromBottomTween.timeScale(1).play(0)
         else fromTopTween.timeScale(1).play(0)
-        // dom.classes.add(el, 'active')
         isActive = true
     }
 
     const deactivate = (direction) => {
-        if (!isActive) return
+        isActive = false
+        if (isDeactive) return
         clearTimeout(intervalId)
         clearTimeout(toTopTimeout)
         clearTimeout(toBottomTimeout)
-        toTopTimeout = setTimeout(() => { fromTopTween.timeScale(4).reverse() }, 300)
-        toBottomTimeout = setTimeout(() => { fromBottomTween.timeScale(4).reverse() }, 300)
-        // dom.classes.remove(el, 'active')
-        isActive = false
+        toTopTimeout = setTimeout(() => { fromTopTween.timeScale(4).reverse() }, 1000)
+        toBottomTimeout = setTimeout(() => { fromBottomTween.timeScale(4).reverse() }, 1000)
+        isDeactive = true
     }
 
     const nextSlide = () => {
@@ -84,8 +88,13 @@ export default (el)=> {
         if (cc.props.index === 0) scope.endSlideCallback()
     }
 
+    const toSlide = (val) => {
+        cc.set(val)
+        scope.slideToCurrent()
+    }
+
     const slideToFirst = () => {
-        cc.props.index = 0
+        cc.set(0)
         scope.slideToCurrent()
     }
 
@@ -102,6 +111,7 @@ export default (el)=> {
         activate,
         deactivate,
         nextSlide,
+        toSlide,
         slideToCurrent,
         update,
         slideToFirst,

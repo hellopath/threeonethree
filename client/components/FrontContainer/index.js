@@ -3,6 +3,7 @@ import template from './template.hbs'
 import Store from '../../store'
 import Constants from '../../constants'
 import dom from 'dom-hand'
+import Menu from '../Menu'
 
 class FrontContainer extends BaseComponent {
     constructor() {
@@ -12,6 +13,17 @@ class FrontContainer extends BaseComponent {
     }
     render(parent) {
         let scope = {}
+        const menu = [
+            { id:0 },
+            { id:1 },
+            { id:2 },
+            { id:3 },
+            { id:4 },
+            { id:5 },
+            { id:6 },
+            { id:7 },
+        ]
+        scope.menu = menu
         super.render('FrontContainer', parent, template, scope)
     }
     componentWillMount() {
@@ -20,6 +32,10 @@ class FrontContainer extends BaseComponent {
     componentDidMount() {
         Store.on(Constants.APP_START, this.onAppStarted)
         Store.on(Constants.ROUTE_CHANGED, this.didRouteChange)
+
+        const menuEl = dom.select('.menu', this.element)
+        this.menu = Menu(menuEl)
+
         super.componentDidMount()
     }
     didRouteChange() {

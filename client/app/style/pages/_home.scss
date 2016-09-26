@@ -5,9 +5,10 @@
 	.all-slides-holder {
 		overflow: hidden;
 		position: absolute;
-		@include simpleAnim(.7s, .0s, $easeOutExpo);
+		// @include simpleAnim(.7s, .0s, $easeOutExpo);
 	}
 	.all-slides-container {
+		z-index: 2;
 		position: relative;
 	}
 	.title {
@@ -18,8 +19,9 @@
 		line-height: $lineheight;
 		font-size: $fontsize;
 		letter-spacing: $letterspacing;
+		text-shadow: 1px 1px 9px rgba(0, 0, 0, 0.6);
 		@include max-screen($MQ_MEDIUM) {
-			$scale: 0.6;
+			$scale: 0.4;
 			line-height: $lineheight * $scale;
 			font-size: $fontsize * $scale;
 			letter-spacing: $letterspacing * $scale;
@@ -31,7 +33,7 @@
 		@extend .full;
 		.slides-container {
 			@extend .full;
-			@include simpleAnim(.8s, .0s, $easeInOutQuint);
+			@include simpleAnim(1s, .0s, $easeInOutQuart);
 			@extend .top-left;
 		}
 		.title-container {
@@ -46,6 +48,8 @@
 				padding: 0 60px;
 			}
 			p {
+				text-shadow: 1px 1px 9px rgba(0, 0, 0, 0.6);
+
 				@include courier();
 				font-size: 21px;
 				line-height: 30px;
@@ -90,6 +94,9 @@
 	}
 	.top-slide {
 		position: relative;
+		.video-holder video {
+			position: absolute;
+		}
 		.arrow-holder {
 			$scale: 1.1;
 			$w: 32px * $scale;
@@ -124,7 +131,7 @@
 		position: relative;
 		&.active {
 			.background {
-				@include opacity(0.2);
+				@include opacity(0.8);
 				@include simpleAnim(.8s, .0s, $easeOutQuint);
 			}
 		}
@@ -137,7 +144,7 @@
 			position: absolute;
 			@extend .full;
 			@include max-screen($MQ_MEDIUM) {
-				top: - $overallMargin * 1.4;
+				// top: - $overallMargin * 1.4;
 			}
 		}
 		.social-holder {
@@ -164,21 +171,21 @@
 			}
 		}
 		p.title {
-			$fontsize: 28px;
-			$lineheight: $fontsize + 10;
-			font-size: $fontsize;
-			line-height: $lineheight;
+			// $fontsize: 124px;
+			// $lineheight: $fontsize + 10;
+			// font-size: $fontsize;
+			// line-height: $lineheight;
 			color: white;
-			padding: 0 21%;
+			padding: 0 8%;
     		letter-spacing: 3px;
     		position: relative;
-			top: - $overallMargin;
+    		margin-bottom: 50px;
 			@include max-screen($MQ_MEDIUM) {
-				$scale: 0.6;
-				font-size: $fontsize * $scale;
-				line-height: $lineheight * $scale;
-				padding: 0 2%;
-				top: - $overallMargin * 1.4;
+				// $scale: 0.6;
+				// font-size: $fontsize * $scale;
+				// line-height: $lineheight * $scale;
+				padding: 0 4%;
+				margin-bottom: 70px;
 			}
 		}
 		.social-holder {
@@ -209,11 +216,85 @@
 			color: white;
 			position: relative;
 			top: - $overallMargin * 0.8;
+			text-transform: uppercase;
 			@include max-screen($MQ_MEDIUM) {
 				$size: 10px;
 				font-size: $size;
 				top: - $overallMargin * 1.2;
 			}
 		}
+		p.distribution {
+			text-transform: uppercase;
+			$size: 14px;
+			line-height: 20px;
+			a {
+				font-size: $size;
+				border-bottom: 2px solid $white;
+			}
+			margin-bottom: $overallMargin / 2;
+		}
 	}
+	#blob-1,
+	#blob-2,
+	#blob-3,
+	#blob-4,
+	#blob-5,
+	#blob-6,
+	#blob-7,
+	#blob-8,
+	#blob-9 {
+		position: absolute;
+		// display: none;
+		z-index: 99999;
+	}
+
+	#blob-1 {
+		$w: 288px;
+		$h: 309px;
+		width: $w;
+		height: $h;
+		@include max-screen($MQ_LARGE) {
+			width: $w * 0.8;
+			height: $h * 0.8;
+		}
+	}
+	#blob-2 {
+		width: 167px;
+		height: 164px;
+	}
+	#blob-3 {
+		width: 468px;
+		height: 219px;
+	}
+	#blob-4 {
+		width: 268px;
+		height: 196px;
+	}
+	#blob-5 {
+		width: 389px;
+		height: 164px;
+	}
+	#blob-6 {
+		width: 759px;
+		height: 264px;
+	}
+
+	#blob-container {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		z-index: 2;
+		@include opacity(0.6);
+		// @include opacity(0);
+		visibility: hidden;
+		// @include simpleAnim(.6s, .0s, $easeOutQuint);
+		&.active {
+			visibility: visible;	
+			// @include simpleAnim(.6s, .0s, $easeOutQuint);
+		}
+	}
+
 }

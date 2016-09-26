@@ -40,12 +40,12 @@ class App {
             legalChild, legalInside, legalImg, titleP
         }
 
-        this.logoSprite = new Motio(legalImg, {
-            fps: 30,
-            frames: 24,
-            width: 444 * 0.4,
-            height: 1402 * 0.4
-        })
+        // this.logoSprite = new Motio(legalImg, {
+        //     fps: 30,
+        //     frames: 24,
+        //     width: 444 * 0.4,
+        //     height: 1402 * 0.4
+        // })
 
         
 
@@ -76,7 +76,7 @@ class App {
         this.legal.tl.pause(0)
     }
     loadMainAssets() {
-        this.logoSprite.toEnd()
+        // this.logoSprite.toEnd()
         this.legal.tl.play(0)
     }
     onReverseCompleted() {
