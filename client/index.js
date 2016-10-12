@@ -16,13 +16,9 @@ Store.Detector.oldIE = dom.classes.contains(Store.Parent, 'ie6') || dom.classes.
 Store.Detector.isSupportWebGL = Utils.supportWebGL()
 if (Store.Detector.oldIE) Store.Detector.isMobile = true
 
-// const img = new Image()
-// img.onload = () => {
-// 	const app = new App()
-// 	app.init()
-// }
-// img.src = Store.baseMediaPath() + 'media/logo.png'
-
-const app = new App()
-app.init()
+$(() => {
+	window.jQuery = window.$ = $
+	const app = new App()
+	app.init()
+})
 

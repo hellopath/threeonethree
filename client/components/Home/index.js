@@ -7,14 +7,12 @@ import slideshow from './slideshow'
 import dom from 'dom-hand'
 import scrolltop from 'simple-scrolltop'
 import inertia from 'wheel-inertia'
-import { addWheelListener } from 'wheel'
 import raf from 'raf'
 import Hammer from 'hammerjs'
 import miniVideo from 'mini-video'
 
 export default class Home extends Page {
     constructor(props) {
-        // props.data.logoUrl = Store.baseMediaPath() + 'media/logo.png'
         props.data.bottomImgSrc = Store.baseMediaPath() + 'media/slideshow/g/0.jpg'
         super(props)
         this.didInertia = this.didInertia.bind(this)
@@ -30,7 +28,6 @@ export default class Home extends Page {
         this.lastScrollY = 0
         const slideshowsEl = dom.select.all('.slideshow')
         this.slidesHolder = dom.select('.all-slides-holder')
-        // this.logoWrapper = dom.select('#logo-wrapper')
         this.slideBlockEl = dom.select.all('.slide-block')
         this.bottomSlide = dom.select('.bottom-slide')
         this.bottomImg = dom.select('.bottom-slide .background')
@@ -39,7 +36,7 @@ export default class Home extends Page {
         this.blobsContainer = dom.select('#blob-container')
         this.slideshows = []
         this.slides = []
-        this.currentSlideIndex = 0
+        this.currentSlideIndex = Store.Detector.isMobile ? 1 : 0
         this.slideshowIndex = 0
         this.oldSlideshow = undefined
         this.newSlideshow = undefined
@@ -61,6 +58,7 @@ export default class Home extends Page {
                 slidesNum++
             })
         })
+
         this.slides.unshift({
             global: -1,
             local: -1,
@@ -69,38 +67,41 @@ export default class Home extends Page {
         })
 
         this.slides.push({
-            global: 18-2,
+            global: 18,
             local: 0,
             parent: this.slideshows.length,
             index: this.slideshows.length + 1
         })
 
-        addWheelListener(document, this.didWheel)
+        $(window).on('mousewheel', this.didWheel)
         inertia.addCallback(this.didInertia)
 
         const videoEl = dom.select('.top-slide .video-holder')
-        // const logoBottomEl = dom.select('.bottom-slide #logo-wrapper')
-        // this.logoTopSprite = new Motio(logoTopEl, {
-        //     fps: 30,
-        //     frames: 24,
-        //     width: Constants.LOGO_W * 0.4,
-        //     height: Constants.LOGO_H * 0.4
-        // })
-
-        this.mVideo = miniVideo({
-            autoplay: true,
-            loop: false,
-            volume: 1
-        })
-        this.mVideo.addTo(videoEl)
-        this.mVideo.load(Store.baseMediaPath() + 'media/Logo_III_01_1.mp4', ()=>{})
-
-        // this.logoBottomSprite = new Motio(logoBottomEl, {
-        //     fps: 30,
-        //     frames: 24,
-        //     width: Constants.LOGO_W * 0.4,
-        //     height: Constants.LOGO_H * 0.4
-        // })
+        const videoUrl = Store.Detector.isMobile ? Store.baseMediaPath() + 'media/Logo_III_01_1_1_mobile.mp4' : Store.baseMediaPath() + 'media/Logo_III_01_1.mp4'
+        
+        this.mainLoader = dom.select('#main-loader')
+        if (!Store.Detector.isMobile) {
+            this.mVideo = miniVideo({
+                autoplay: Store.Detector.isMobile ? false : true,
+                loop: false,
+                volume: 1
+            })
+            this.mVideo.addTo(videoEl)
+            this.mVideo.load(videoUrl, ()=>{
+                dom.classes.add(this.mainLoader, 'remove')
+                dom.classes.add(this.arrowBtn, 'active')
+                setTimeout(() => {
+                    this.spinnerTween.pause()
+                    this.spinnerTween = undefined
+                    dom.tree.remove(this.mainLoader)
+                }, 2000)
+            })
+            var $spinner = dom.select('.spinner-wrapper', this.mainLoader)
+            var $spinnerSvg = dom.select('svg', $spinner)
+            this.spinnerTween = TweenMax.to($spinnerSvg, 0.5, { rotation:'360deg', repeat:-1, ease:Linear.easeNone })
+        } else {
+            dom.tree.remove(this.mainLoader)
+        }
 
         const hammertime = new Hammer(document)
         hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
@@ -129,8 +130,11 @@ export default class Home extends Page {
                 this.currentSlideIndex = slide.global - 1
             }
         })
-        if (this.currentSlideIndex === 17-2) this.currentSlideIndex = 19-2
+        if (this.currentSlideIndex === 17) this.currentSlideIndex = 19
         if (this.currentSlideIndex < 0) this.currentSlideIndex = 0
+        if (Store.Detector.isMobile) {
+            if (this.currentSlideIndex <= 1) this.currentSlideIndex = 1
+        }
         this.scrollNext(1)
     }
     onScroll(e) {
@@ -167,11 +171,7 @@ export default class Home extends Page {
         this.rafId = raf(this.animate)
     }
     didWheel(e) {
-        // console.log('didWheel')
-        const delta = e.wheelDelta
-        // const delta = e.deltaY
-        // console.log(e)
-        // console.log(delta)
+        const delta = e.deltaY
         inertia.update(delta)
     }
     didInertia(dir) {
@@ -186,12 +186,13 @@ export default class Home extends Page {
         if (this.currentSlideIndex < 0) this.currentSlideIndex = 0
         if (this.currentSlideIndex > this.slides.length - 1) this.currentSlideIndex = 0
 
+        if (Store.Detector.isMobile && this.currentSlideIndex < 1) this.currentSlideIndex = 1 
+
         this.nextSlideIndex = this.currentSlideIndex + 1
         if (this.nextSlideIndex > this.slides.length - 1) this.nextSlideIndex = 0
 
         this.previousSlideIndex = this.currentSlideIndex - 1
         if (this.previousSlideIndex < 0) this.previousSlideIndex = this.slides.length - 1
-
         this.scrollNext(dir)
     }
     scrollNext(dir) {
@@ -238,7 +239,6 @@ export default class Home extends Page {
         }
 
         if (this.currentSlideIndex === this.slides.length - 1) {
-            // setTimeout(() => { this.logoBottomSprite.toEnd() }, 600)
             dom.classes.add(this.bottomSlide, 'active')
         } else {
             setTimeout(() => {
@@ -253,7 +253,7 @@ export default class Home extends Page {
         }
 
         if (this.currentSlideIndex === 0) {
-            this.mVideo.play(0)
+            if (!Store.Detector.isMobile) this.mVideo.play(0)
         }
         
     }
@@ -264,11 +264,9 @@ export default class Home extends Page {
         super.setupAnimations()
     }
     didTransitionInComplete() {
-        // this.logoWrapper.style.opacity = 1
         super.didTransitionInComplete()
     }
     willTransitionIn() {
-        // this.logoTopSprite.toEnd()
         super.willTransitionIn()
     }
     willTransitionOut() {
@@ -298,15 +296,14 @@ export default class Home extends Page {
         this.bottomImg.style.top = bottomImgVars.top + 'px'
         this.bottomImg.style.left = bottomImgVars.left + 'px'
 
-        this.mVideo.el.style.width = bottomImgVars.width + 'px'
-        this.mVideo.el.style.height = bottomImgVars.height + 'px'
-        this.mVideo.el.style.top = bottomImgVars.top + 'px'
-        this.mVideo.el.style.left = bottomImgVars.left + 'px'
-
-        // this.logoTopSprite.element.style.left = (windowW >> 1) - (this.logoTopSprite.width >> 1) + 'px'
-        // this.logoTopSprite.element.style.top = ((windowH * 0.9) >> 1) - (this.logoTopSprite.height >> 1) + 'px'
-
-        // this.blobsContainer.style.height = this.slideshows.length * windowH + 'px'
+        if (!Store.Detector.isMobile) {
+            this.mVideo.el.style.width = bottomImgVars.width + 'px'
+            this.mVideo.el.style.height = bottomImgVars.height + 'px'
+            this.mVideo.el.style.top = bottomImgVars.top + 'px'
+            this.mVideo.el.style.left = bottomImgVars.left + 'px'
+            this.mainLoader.style.left = (windowW >> 1) - (40 / 2) + 'px'
+            this.mainLoader.style.top = (windowH >> 1) - (40) + 'px'
+        }
 
         this.scrollNext()
         super.resize()

@@ -94,6 +94,7 @@ export default (el)=> {
     }
 
     const slideToFirst = () => {
+        console.log('slideToFirst')
         cc.set(0)
         scope.slideToCurrent()
     }
