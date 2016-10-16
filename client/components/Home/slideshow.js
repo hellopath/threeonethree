@@ -42,7 +42,7 @@ export default (el)=> {
         const windowH = Store.Window.h
         const slideResizeVars = Utils.resizePositionProportionally(windowW, windowH, Constants.MEDIA_GLOBAL_W, Constants.MEDIA_GLOBAL_H)
         slides.forEach((slide, i) => {
-            slide.container.style.top = (windowH * i) + 'px'
+            if (!Store.Detector.isMobile) slide.container.style.top = (windowH * i) + 'px'
             slide.img.style.width = slideResizeVars.width + 'px'
             slide.img.style.height = slideResizeVars.height + 'px'
             slide.img.style.left = slideResizeVars.left + 'px'
@@ -94,7 +94,6 @@ export default (el)=> {
     }
 
     const slideToFirst = () => {
-        console.log('slideToFirst')
         cc.set(0)
         scope.slideToCurrent()
     }
@@ -103,7 +102,7 @@ export default (el)=> {
         const windowW = Store.Window.w
         const windowH = Store.Window.h
         const yPos = windowH * cc.props.index
-        Utils.translate(slidesContainerEl, 0, -yPos, 0)
+        if (!Store.Detector.isMobile) Utils.translate(slidesContainerEl, 0, -yPos, 0)
     }
 
     scope = {

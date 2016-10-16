@@ -61,6 +61,9 @@ class BasePager extends BaseComponent {
         this.oldPageDivRef = this.currentPageDivRef
         this.currentPageDivRef = (this.currentPageDivRef === 'page-a') ? 'page-b' : 'page-a'
         const el = document.getElementById(this.currentPageDivRef)
+        Store.pageContent().slideshows.forEach((slide) => {
+            slide.isMobile = Store.Detector.isMobile
+        })
         const props = {
             id: this.currentPageDivRef,
             isReady: this.onPageReady,

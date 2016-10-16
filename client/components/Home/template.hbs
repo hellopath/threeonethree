@@ -39,11 +39,19 @@
 						</div>
 					</div>
 					<div class="slides-container">
-						{{#each images}}
-							<div class="slide">
-								<img src="media/slideshow/{{url}}">
-							</div>
-						{{/each}}
+						{{#if isMobile}}
+							{{#each imagesMobile}}
+								<div class="slide">
+									<img src="media/slideshow/{{url}}">
+								</div>
+							{{/each}}
+						{{else}}
+							{{#each images}}
+								<div class="slide">
+									<img src="media/slideshow/{{url}}">
+								</div>
+							{{/each}}
+						{{/if}}
 					</div>
 				</div>
 			{{/each}}

@@ -1,8 +1,8 @@
 if (!window.console) window.console = { log: () => {} }
-
 import Store from './store'
 import Utils from './utils'
 import App from './app'
+import Constants from './constants'
 import MobileDetect from 'mobile-detect'
 import dom from 'dom-hand'
 
@@ -17,6 +17,9 @@ Store.Detector.isSupportWebGL = Utils.supportWebGL()
 if (Store.Detector.oldIE) Store.Detector.isMobile = true
 
 $(() => {
+	Constants.MEDIA_GLOBAL_W = Store.Detector.isMobile ? 488 : 1920
+    Constants.MEDIA_GLOBAL_H = Store.Detector.isMobile ? 867 : 1080
+
 	window.jQuery = window.$ = $
 	const app = new App()
 	app.init()

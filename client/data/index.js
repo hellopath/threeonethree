@@ -20,6 +20,9 @@ export default {
                         { url: 'a/0.jpg' },
                         { url: 'a/1.jpg' },
                         { url: 'a/2.jpg' }
+                    ],
+                    imagesMobile: [
+                        { url: 'a/mobile.jpg' },
                     ]
                 },
                 {
@@ -29,6 +32,9 @@ export default {
                         { url: 'b/0.jpg' },
                         { url: 'b/1.jpg' },
                         { url: 'b/2.jpg' }
+                    ],
+                    imagesMobile: [
+                        { url: 'b/mobile.jpg' },
                     ]
                 },
                 {
@@ -38,6 +44,9 @@ export default {
                         { url: 'c/0.jpg' },
                         { url: 'c/1.jpg' },
                         { url: 'c/2.jpg' }
+                    ],
+                    imagesMobile: [
+                        { url: 'c/mobile.jpg' },
                     ]
                 },
                 {
@@ -47,6 +56,9 @@ export default {
                         { url: 'd/0.jpg' },
                         { url: 'd/1.jpg' },
                         { url: 'd/2.jpg' }
+                    ],
+                    imagesMobile: [
+                        { url: 'd/mobile.jpg' },
                     ]
                 },
                 {
@@ -56,6 +68,9 @@ export default {
                         { url: 'e/0.jpg' },
                         { url: 'e/1.jpg' },
                         { url: 'e/2.jpg' }
+                    ],
+                    imagesMobile: [
+                        { url: 'e/mobile.jpg' },
                     ]
                 },
                 {
@@ -65,6 +80,9 @@ export default {
                         { url: 'f/0.jpg' },
                         { url: 'f/1.jpg' },
                         { url: 'f/2.jpg' }
+                    ],
+                    imagesMobile: [
+                        { url: 'f/mobile.jpg' },
                     ]
                 }
             ]

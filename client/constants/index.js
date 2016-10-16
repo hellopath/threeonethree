@@ -37,8 +37,8 @@ export default {
     LOGO_W: 444,
     LOGO_H: 1402,
 
-    MEDIA_GLOBAL_W: 1920,
-    MEDIA_GLOBAL_H: 1080,
+    MEDIA_GLOBAL_W: undefined,
+    MEDIA_GLOBAL_H: undefined,
 
     MIN_MIDDLE_W: 960,
     MQ_XSMALL: 320,

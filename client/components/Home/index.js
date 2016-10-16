@@ -13,7 +13,8 @@ import miniVideo from 'mini-video'
 
 export default class Home extends Page {
     constructor(props) {
-        props.data.bottomImgSrc = Store.baseMediaPath() + 'media/slideshow/g/0.jpg'
+        const bottomImgName = Store.Detector.isMobile ? 'mobile.jpg' : '0.jpg'
+        props.data.bottomImgSrc = Store.baseMediaPath() + 'media/slideshow/g/' + bottomImgName
         super(props)
         this.didInertia = this.didInertia.bind(this)
         this.didWheel = this.didWheel.bind(this)
@@ -37,6 +38,7 @@ export default class Home extends Page {
         this.slideshows = []
         this.slides = []
         this.currentSlideIndex = Store.Detector.isMobile ? 1 : 0
+        this.totalSlides = Store.Detector.isMobile ? 5 : 19
         this.slideshowIndex = 0
         this.oldSlideshow = undefined
         this.newSlideshow = undefined
@@ -44,11 +46,12 @@ export default class Home extends Page {
         const dataSlideshows = Store.pageContent().slideshows
         let slidesNum = 0
         slideshowsEl.forEach((el, i) => {
-            const dataSlideshow = dataSlideshows[i].images
+            const dataSlideshow = Store.Detector.isMobile ? dataSlideshows[i].imagesMobile : dataSlideshows[i].images
             const s = slideshow(el)
             s.id = i
             this.slideshows[i] = s
-            dataSlideshow.forEach((dataS, j) => {
+            for (var j = 0; j < dataSlideshow.length; j++) {
+                const dataS = dataSlideshow[j]
                 this.slides.push({
                     global: slidesNum,
                     local: j,
@@ -56,7 +59,7 @@ export default class Home extends Page {
                     index: i + 1
                 })
                 slidesNum++
-            })
+            }
         })
 
         this.slides.unshift({
@@ -67,7 +70,7 @@ export default class Home extends Page {
         })
 
         this.slides.push({
-            global: 18,
+            global: this.totalSlides - 1,
             local: 0,
             parent: this.slideshows.length,
             index: this.slideshows.length + 1
@@ -130,7 +133,7 @@ export default class Home extends Page {
                 this.currentSlideIndex = slide.global - 1
             }
         })
-        if (this.currentSlideIndex === 17) this.currentSlideIndex = 19
+        if (this.currentSlideIndex === this.totalSlides - 2) this.currentSlideIndex = this.totalSlides
         if (this.currentSlideIndex < 0) this.currentSlideIndex = 0
         if (Store.Detector.isMobile) {
             if (this.currentSlideIndex <= 1) this.currentSlideIndex = 1
