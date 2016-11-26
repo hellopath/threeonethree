@@ -15,7 +15,7 @@ export default {
             'slideshows': [
                 {
                     title: 'I’M FROM ENGLAND',
-                    paragraph: 'The Squadron 303 is distilled in Cambridgeshire from King Edward potatoes and the flask produced in Yorkshire.',
+                    paragraph: 'The Squadron 303 is distilled in Cambridgeshire from King Edward potatoes and the flask is produced in Yorkshire.',
                     images: [
                         { url: 'a/0.jpg' },
                         { url: 'a/1.jpg' },
@@ -39,7 +39,7 @@ export default {
                 },
                 {
                     title: 'I’M UNFILTERED<br>AND EXTRA SMOOTH',
-                    paragraph: 'Like in the days, a single distillation and no filtration and still extra smooth.',
+                    paragraph: 'Like in the original recipe: a single distillation, no filtration and still extra smooth.',
                     images: [
                         { url: 'c/0.jpg' },
                         { url: 'c/1.jpg' },
@@ -75,7 +75,7 @@ export default {
                 },
                 {
                     title: 'I CAN FLY',
-                    paragraph: 'Just like the Polish pilots 75 years ago, the founders of the brand put in a Spitfire extra tanker the first 50 litters of the Squadron 303 vodka to cool it down.',
+                    paragraph: 'Just like the Polish pilots 75 years ago, the founders of the brand put in a Spitfire extra tanker the first 50 litres of the Squadron 303 vodka to cool it down.',
                     images: [
                         { url: 'f/0.jpg' },
                         { url: 'f/1.jpg' },
