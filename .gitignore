@@ -4,4 +4,3 @@ node_modules
 prod
 components/*
 npm-debug.log
-dev/media
