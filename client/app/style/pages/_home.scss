@@ -242,6 +242,18 @@
 			}
 			margin-bottom: $overallMargin / 2;
 		}
+		p.contact {
+			margin-bottom: $overallMargin / 2;
+			a {
+				$size: 14px;
+				font-size: $size;
+				@include courier();
+				line-height: $size;
+				font-weight: bold;
+				color: white;
+				border-bottom: 2px solid $white;		
+			}
+		}
 	}
 	#blob-1,
 	#blob-2,
